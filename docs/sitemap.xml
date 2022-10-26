@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url>
+        <loc>https://no-framework.com/</loc>
+    </url>
+    <url>
+        <loc>https://no-framework.com/Distros/</loc>
+    </url>
+    <url>
+        <loc>https://no-framework.com/Distros/modular-provider-architecture/</loc>
+    </url>
+    <url>
+        <loc>https://no-framework.com/Packages/</loc>
+    </url>
+    <url>
+        <loc>https://no-framework.com/Packages/instance-provider/</loc>
+    </url>
+    <url>
+        <loc>https://no-framework.com/Packages/modules/</loc>
+    </url>
+    <url>
+        <loc>https://no-framework.com/Packages/runtime/</loc>
+    </url>
+</urlset>

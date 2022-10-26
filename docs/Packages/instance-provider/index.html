@@ -1,0 +1,150 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://no-framework.com/main.css">
+    <link rel="icon" href="https://www.getzola.org/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title> No-Framework | Instance Provider </title>
+</head>
+<body>
+
+<main>
+    
+    <nav>
+            <a href="https:&#x2F;&#x2F;no-framework.com&#x2F;">
+                        <img src="https://no-framework.com/logo.png" alt="logo"/>
+                    </a>
+                <a href="javascript:void(0);" onclick="burger()" id="mobile" class="ms-Icon--GlobalNavButton"></a>
+            <div id="trees">
+                <input class="tree-toggle" type="checkbox" id="packages"
+                           checked/>
+                    <label class="tree-toggle-label"
+                           for="packages">Packages</label>
+
+                    <ul class="subtree">
+                        <li class="active">
+                                <a href="https://no-framework.com/Packages/instance-provider/">Instance Provider</a>
+                            </li>
+
+                            <li >
+                                <a href="https://no-framework.com/Packages/modules/">Modules</a>
+                            </li>
+
+                            <li >
+                                <a href="https://no-framework.com/Packages/runtime/">Runtime</a>
+                            </li>
+
+                            </ul>
+                <input class="tree-toggle" type="checkbox" id="distros"
+                           />
+                    <label class="tree-toggle-label"
+                           for="distros">Distros</label>
+
+                    <ul class="subtree">
+                        <li >
+                                <a href="https://no-framework.com/Distros/modular-provider-architecture/">Overview</a>
+                            </li>
+
+                            </ul>
+                </div>
+        </nav>
+    <article>
+
+        <div id="on_right">
+                <span id="search-ico" class="ms-Icon--Search"></span>
+            </div>
+            <div class="search-container">
+                <input id="search" type="search" placeholder="Search as you type...">
+                <div class="search-results">
+                    <div class="search-results__header"></div>
+                    <ul class="search-results__items"></ul>
+                </div>
+            </div>
+        <div id="wrap">
+            
+        <p>The instance provider is here to help you keep code decoupled so you can re-use
+it in ways you never expected.</p>
+<p>If you used an IoC container this will feel familiar to you, the only
+difference is it is done without any third-party library.</p>
+<pre data-lang="python" style="background-color:#eff1f5;color:#4f5b66;" class="language-python "><code class="language-python" data-lang="python"><span style="color:#b48ead;">from </span><span>some_module.internals </span><span style="color:#b48ead;">import </span><span>UsefulClass, Details
+</span><span>
+</span><span style="color:#b48ead;">class </span><span style="color:#d08770;">SomeModuleProvider</span><span style="color:#343d46;">:
+</span><span>    </span><span style="color:#b48ead;">def </span><span style="color:#8fa1b3;">provide_instance_for_other_modules</span><span>(</span><span style="color:#bf616a;">self</span><span>)
+</span><span>        &quot;&quot;&quot;
+</span><span style="color:#a3be8c;">	By naming convention, &quot;instance_for_other_modules&quot; is the &quot;name&quot; of
+</span><span style="color:#a3be8c;">	these instances, they not accept any parameters to modify values
+</span><span style="color:#a3be8c;">        because they become &quot;unnamed&quot; if that happens, (you don&#39;t know what it will
+</span><span style="color:#a3be8c;">        return). That can be done with _create methods.
+</span><span style="color:#a3be8c;">        </span><span>&quot;&quot;&quot;
+</span><span>        details_for_useful_class = </span><span style="color:#bf616a;">self</span><span>.</span><span style="color:#bf616a;">_provide_instance_privately_to_this_provider</span><span>()
+</span><span>        </span><span style="color:#b48ead;">return </span><span style="color:#bf616a;">UsefulClass</span><span>(details_for_useful_class)
+</span><span>
+</span><span>    </span><span style="color:#b48ead;">def </span><span style="color:#8fa1b3;">_provide_instance_privately_to_this_provider</span><span>(</span><span style="color:#bf616a;">self</span><span>)
+</span><span>        &quot;&quot;&quot;
+</span><span style="color:#a3be8c;">	Same as above, except you don&#39;t want anyone to use these externally.
+</span><span style="color:#a3be8c;">        They&#39;re private.
+</span><span style="color:#a3be8c;">        </span><span>&quot;&quot;&quot;
+</span><span>        </span><span style="color:#b48ead;">return </span><span style="color:#bf616a;">Details</span><span>(&quot;</span><span style="color:#a3be8c;">Private</span><span>&quot;)
+</span><span>
+</span><span>    </span><span style="color:#b48ead;">def </span><span style="color:#8fa1b3;">_create_code_duplicated_often</span><span>(</span><span style="color:#bf616a;">self</span><span>, </span><span style="color:#bf616a;">modifier1</span><span>, </span><span style="color:#bf616a;">modifier2</span><span>)
+</span><span>        &quot;&quot;&quot;
+</span><span style="color:#a3be8c;">	Useful when you want to avoid duplcating code freqnetly to change some
+</span><span style="color:#a3be8c;">	details. Concrete instances still need to go through a provider
+</span><span style="color:#a3be8c;">        however. Public crete methods are not allowed.
+</span><span style="color:#a3be8c;">        </span><span>&quot;&quot;&quot;
+</span><span>        </span><span style="color:#b48ead;">return </span><span style="color:#bf616a;">Details</span><span>(modifier1 + modifier2)
+</span></code></pre>
+<p>If you wish to return a single-instance for a method that is called many times,
+use of the <code>functools.cache</code> decorator is an easy way to get a &quot;singleton&quot; on
+the instance of a provider without enforcing it on every software component
+that uses this provider.</p>
+<p>The above code would look like this if we were using <code>python-dependency-injector</code> instead:</p>
+<pre data-lang="python" style="background-color:#eff1f5;color:#4f5b66;" class="language-python "><code class="language-python" data-lang="python"><span style="color:#b48ead;">from </span><span>dependency_injector </span><span style="color:#b48ead;">import </span><span>containers, providers
+</span><span style="color:#b48ead;">from </span><span>some_module.internals </span><span style="color:#b48ead;">import </span><span>UsefulClass, Details
+</span><span>
+</span><span style="color:#b48ead;">def </span><span style="color:#8fa1b3;">_create_code_duplicated_often</span><span>(</span><span style="color:#bf616a;">self</span><span>, </span><span style="color:#bf616a;">modifier1</span><span>, </span><span style="color:#bf616a;">modifier2</span><span>)
+</span><span>    </span><span style="color:#b48ead;">return </span><span style="color:#bf616a;">Details</span><span>(modifier1 + modifier2)
+</span><span>
+</span><span style="color:#b48ead;">class </span><span style="color:#d08770;">Container</span><span style="color:#343d46;">(</span><span style="color:#a3be8c;">containers.DeclarativeContainer</span><span style="color:#343d46;">):
+</span><span>    _detail_provider = providers.</span><span style="color:#bf616a;">Factory</span><span>(Details)
+</span><span>    useful_class_provider = providers.</span><span style="color:#bf616a;">Object</span><span>(UsefulClass, _detail_provider)
+</span></code></pre>
+<p>We don't permit logic inside providers, they are strictly there to orchestrate
+how &quot;infrastructure&quot; is put together. Detecting if &quot;the environment is dev&quot; is
+also not permitted anywhere and generally a bad practice.</p>
+<p>Using a provider is only permitted in other providers or in <code>run.py</code> file.</p>
+<p>The provider structure is intentionally designed to provide a new instance by
+default instead of re-use instances (re-use is instead an opt-in behaviour).
+This means when you have two or three run.py files in a project you can
+deterministically map out where side-effects come from, but also you introduce
+&quot;bulkheads&quot; against side-effects from other instances. Breaking the database
+connection used by one component doesn't need to break the database connections
+for everything else in your application unless you specifically want it to.</p>
+<p>This also has advantages for threaded applications as you now have fine-grained
+control over what instances are shared and which ones are re-created in
+threads.</p>
+<p>The downside is that the overall memory footprint might be a bit larger.
+Because we're mostly talking about &quot;infrastructure&quot; you should expect the
+memory footprint to not grow with data processed through the application but
+rather how often a provider is used by another module. If you have a common
+component used 10 times it will create 10 instances. This is manageable however
+as the memory footprint of your infrastructure will be deterministic and
+measurable the moment you &quot;run&quot; your application, you do not need to test it
+with different workloads, everything is provisioned in memory once the
+application starts. This also means the difference between memory footprint at
+any point at runtime and the size when the application started is equal to the
+amount of &quot;data state&quot; being held in the system.</p>
+
+    
+        </div>
+
+    </article>
+</main>
+
+
+    <script type="text/javascript" src="https://no-framework.com/elasticlunr.min.js" defer></script>
+    <script type="text/javascript" src="https://no-framework.com/search_index.en.js" defer></script>
+    <script type="text/javascript" src="https://no-framework.com/js.js" defer></script>
+</body>
+</html>

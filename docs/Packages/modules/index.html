@@ -1,0 +1,141 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://no-framework.com/main.css">
+    <link rel="icon" href="https://www.getzola.org/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title> No-Framework | Modules </title>
+</head>
+<body>
+
+<main>
+    
+    <nav>
+            <a href="https:&#x2F;&#x2F;no-framework.com&#x2F;">
+                        <img src="https://no-framework.com/logo.png" alt="logo"/>
+                    </a>
+                <a href="javascript:void(0);" onclick="burger()" id="mobile" class="ms-Icon--GlobalNavButton"></a>
+            <div id="trees">
+                <input class="tree-toggle" type="checkbox" id="packages"
+                           checked/>
+                    <label class="tree-toggle-label"
+                           for="packages">Packages</label>
+
+                    <ul class="subtree">
+                        <li >
+                                <a href="https://no-framework.com/Packages/instance-provider/">Instance Provider</a>
+                            </li>
+
+                            <li class="active">
+                                <a href="https://no-framework.com/Packages/modules/">Modules</a>
+                            </li>
+
+                            <li >
+                                <a href="https://no-framework.com/Packages/runtime/">Runtime</a>
+                            </li>
+
+                            </ul>
+                <input class="tree-toggle" type="checkbox" id="distros"
+                           />
+                    <label class="tree-toggle-label"
+                           for="distros">Distros</label>
+
+                    <ul class="subtree">
+                        <li >
+                                <a href="https://no-framework.com/Distros/modular-provider-architecture/">Overview</a>
+                            </li>
+
+                            </ul>
+                </div>
+        </nav>
+    <article>
+
+        <div id="on_right">
+                <span id="search-ico" class="ms-Icon--Search"></span>
+            </div>
+            <div class="search-container">
+                <input id="search" type="search" placeholder="Search as you type...">
+                <div class="search-results">
+                    <div class="search-results__header"></div>
+                    <ul class="search-results__items"></ul>
+                </div>
+            </div>
+        <div id="wrap">
+            
+        <p>Modularity brings some benefits. You can modify, remove or replace a software
+component without spiraling changes across the entire project. You can re-use
+components in ways that were never before considered.</p>
+<p>For example, if you define a module for a Postgres database connection, your project
+should be able to connect to 50 different databases using the same code.
+Secondly, your project should be able to also add a MongoDB component which can
+also let your application connect to hundreds of databases at the same time.</p>
+<p>This is easier said than done and requires decoupling from other components in
+the software and only letting dependencies (eg, <code>import</code> statements) be formed
+when there is a concrete logical need (instead of a convenience short-cut when
+writing code).</p>
+<p>You should be able to select the folder for a software component and run a <code>git subtree-split</code> to extract it into its own stand-alone software package (with
+minor work to add a new dependency file and adjust import names).</p>
+<p>It means you have a tree structure like this:</p>
+<pre style="background-color:#eff1f5;color:#4f5b66;"><code><span>    modular_provider_architecture
+</span><span>    ├── __init__.py
+</span><span>    ├── logic_module
+</span><span>    │   ├── __init__.py
+</span><span>    │   ├── logic.py
+</span><span>    │   └── provider.py
+</span><span>    └── module_runtime
+</span><span>        ├── __init__.py
+</span><span>        ├── provider.py
+</span><span>        ├── run.py
+</span><span>        └── runtime.py
+</span></code></pre>
+<p>Every top-level folder is a &quot;module&quot; in this architecture. This language may be
+confusing in python so feel free to call it a component instead if that's less
+confusing for your team.</p>
+<p>The concept of a &quot;submodule&quot; is a violation of this architecture as it forces
+heavily coupling between components. Keep it all on one folder level, and pick
+good names. If you have too many folders it is a good indication that your
+project has grown too large, and development would be easier if you created two
+projects with 1 common package made from common software components (remember,
+you can use <code>git subtree-split</code> to move code around to a new home and keep the
+history)</p>
+<p>Your software dependencies should look one-way:</p>
+<pre style="background-color:#eff1f5;color:#4f5b66;"><code><span> ┌────────────┐
+</span><span> │ module     │
+</span><span> │  _runtime  │
+</span><span> └─────┬──────┘
+</span><span>       │
+</span><span>       │Depends on
+</span><span>       │ (&quot;imports from&quot;)
+</span><span>       │
+</span><span>       │
+</span><span>       ▼
+</span><span>       ▼
+</span><span> ┌─────▼──────┐
+</span><span> │ logic      │
+</span><span> │  _module   │
+</span><span> └────────────┘
+</span></code></pre>
+<p>If you have any &quot;cycles&quot; in your architecture it is likely that you need to
+make a simple package in-between to keep the common information (often this is
+just an interface or some similar data)</p>
+<p>In this architecture there are two major types of object instances:</p>
+<ol>
+<li>&quot;Infrastructure&quot;, it moves data around and processes it</li>
+<li>&quot;Data Transfer Objects&quot; which represent state.</li>
+</ol>
+<p>You can only create infrastructure inside a &quot;Provider&quot;. We don't create new
+classes &quot;on-the-fly&quot; inside DTOs or other infrastructure.</p>
+
+    
+        </div>
+
+    </article>
+</main>
+
+
+    <script type="text/javascript" src="https://no-framework.com/elasticlunr.min.js" defer></script>
+    <script type="text/javascript" src="https://no-framework.com/search_index.en.js" defer></script>
+    <script type="text/javascript" src="https://no-framework.com/js.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,143 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://no-framework.com/main.css">
+    <link rel="icon" href="https://www.getzola.org/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>No-Framework</title>
+</head>
+<body>
+
+<main>
+    
+    <nav>
+            <img src="https://no-framework.com/logo.png" alt="logo"/>
+                <a href="javascript:void(0);" onclick="burger()" id="mobile" class="ms-Icon--GlobalNavButton"></a>
+            <div id="trees">
+                <input class="tree-toggle" type="checkbox" id="packages"
+                           />
+                    <label class="tree-toggle-label"
+                           for="packages">Packages</label>
+
+                    <ul class="subtree">
+                        <li >
+                                <a href="https://no-framework.com/Packages/instance-provider/">Instance Provider</a>
+                            </li>
+
+                            <li >
+                                <a href="https://no-framework.com/Packages/modules/">Modules</a>
+                            </li>
+
+                            <li >
+                                <a href="https://no-framework.com/Packages/runtime/">Runtime</a>
+                            </li>
+
+                            </ul>
+                <input class="tree-toggle" type="checkbox" id="distros"
+                           />
+                    <label class="tree-toggle-label"
+                           for="distros">Distros</label>
+
+                    <ul class="subtree">
+                        <li >
+                                <a href="https://no-framework.com/Distros/modular-provider-architecture/">Overview</a>
+                            </li>
+
+                            </ul>
+                </div>
+        </nav>
+    <article>
+
+        <div id="on_right">
+                <span id="search-ico" class="ms-Icon--Search"></span>
+            </div>
+            <div class="search-container">
+                <input id="search" type="search" placeholder="Search as you type...">
+                <div class="search-results">
+                    <div class="search-results__header"></div>
+                    <ul class="search-results__items"></ul>
+                </div>
+            </div>
+        <div id="wrap">
+            <h2 id="when-you-don-t-want-to-use-a-framework-but-you-want-to-have-conventions">When you don't want to use a framework, but you want to have conventions&nbsp;<a class="anchor" href="#when-you-don-t-want-to-use-a-framework-but-you-want-to-have-conventions">&#xE732;</a></h2>
+<p>No-Framework is a concept library which you can use as you wish. The aim is to
+offer pre-packaed architecture conventions, not running software packages.o</p>
+<p>In general when a software team wants to use a framework it's usually for one of three reasons:</p>
+<ol>
+<li>They want pre-packaged conventions. The framework tells them where to put complexity.</li>
+<li>They use it because there's wide-spread support, and this allows them to
+easily get help and move quickly through common pitfalls.</li>
+<li>They want pre-built common infrastructure. The framework ships simple APIs
+to do complicated stuff, and rewards them with a community effort to do it
+better than they could on their own.</li>
+</ol>
+<p>No-Framewok is not openly opposed to the use of frameworks and not part of any
+&quot;you don't need a framework&quot; mindsets (the author of this document actually
+likes frameworks, a lot). Indeed, you don't need a framework, but often it
+makes sense to have one. No-Framework is a collection of &quot;codeless frameworks&quot;
+(Distros), made up of codeless concepts (&quot;Packages&quot;). </p>
+<h2 id="key-concepts">Key concepts&nbsp;<a class="anchor" href="#key-concepts">&#xE732;</a></h2>
+<ul>
+<li>Distros are a currated set of packages that &quot;just make sense together&quot;, like
+you would expect from a framework.</li>
+<li>Packages are ideas for how to solve common problems. These are either very
+concrete design patterns, or strict rules on how to approach something
+(maybe something you would enforce at Code Review or thorugh a linter rule). 
+No framework packages are ideas that stand alone. This means there are no
+supporting scripts or helper functions or third party vendors neede to make the
+idea work. Sometimes a helper function does make the idea better, in this case,
+it is easy to write an actual software package with lines of code, but base it
+on a corresponding no-framework package. Similarly, no-framework packages can
+be based on ideas from real software packages, and paired down to a simpler
+concept, or just rule expected to be enforced </li>
+</ul>
+<h2 id="what-is-not-a-framework-and-what-is-no-framework">What is &quot;not a framework&quot; and what is &quot;no framework&quot;?&nbsp;<a class="anchor" href="#what-is-not-a-framework-and-what-is-no-framework">&#xE732;</a></h2>
+<p>A framework is often used to enforce rules. &quot;No framework&quot; brings rules but no
+code. &quot;Not a framework&quot; is the reason most people dislike using a framework:
+it's just a mess of any idea without rules. No-framework is code that you write
+without a third party package to enforce concepts. It might be that a framework
+or tool is based on a specific idea from the no-framework catalogue of ideas.
+That's fine, but at that moment the software package is a framework, the
+no-framework concept remains &quot;not a framework&quot;, they do not merge, but the
+concrete code can form a dependency on the idea.</p>
+<h3 id="where-s-the-line-between-no-framework-and-frameworks">Where's the line between no-framework and frameworks?&nbsp;<a class="anchor" href="#where-s-the-line-between-no-framework-and-frameworks">&#xE732;</a></h3>
+<p>In general, things that are well-supported by many languages can belong to
+no-framework. For example: Functions, Classes, variables... but not things like
+the exact functools package in python. The concept of regex is fine, but not
+requiring a specific function in PHP that does string manipulation. If a
+library is available or cloned/ported to many languages, it is not valid in
+No-framework as it heavily depends on real code. This is a fuzzy boundary and
+we will need to improve the explanation as cases come up.</p>
+<h2 id="why-no-framework">Why No-framework?&nbsp;<a class="anchor" href="#why-no-framework">&#xE732;</a></h2>
+<p>One of the reasons people like frameworks is because they provide rules, but
+the rules are often enforced via lines-of-code that are a hard dependency both
+in API design, software behaviour, dev-dependencies, or some other &quot;code&quot;
+dependency. </p>
+<p>Frameworks are awesome for getting started with a project, but after some years
+there is a non-trivial tax paid for the software dependencies (for your code
+depending on a framework, but also a framework depending on libraries). Interestingly,
+there is a more hidden dependency which is easy to break at any time: the ideas
+behind the framework and libraries. Often, projects have an &quot;invisible&quot;
+conceptual dependency on core ideas that might not be well stated in abstract
+and only discoverable through the specific concretion.</p>
+<p>No-framework offers one layer of abstraction between pure idea-space (the space
+of all possible ideas) and code.</p>
+<p>There are other reasons consumers of No-Framework might enjoy it, but they are
+secondary benefits and not the primary goal. The biggest of those benefits is usually:
+The team has higher ownership over their code because they wrote it, if they
+need to get out of some situation they can modify their own code. Not all
+software packages make this task very easy, many require hard forking to fix
+and offer complex undocumented software architectures.</p>
+
+        </div>
+
+    </article>
+</main>
+
+
+    <script type="text/javascript" src="https://no-framework.com/elasticlunr.min.js" defer></script>
+    <script type="text/javascript" src="https://no-framework.com/search_index.en.js" defer></script>
+    <script type="text/javascript" src="https://no-framework.com/js.js" defer></script>
+</body>
+</html>
