@@ -3,22 +3,83 @@ title = "index"
 insert_anchor_links = "right"
 +++
 
-## An easy way to create a document library for your project
+## When you don't want to use a framework, but you want to have conventions
 
-Demo: [https://easydocs.codeandmedia.com/](https://easydocs.codeandmedia.com/)
+No-Framework is a concept library which you can use as you wish. The aim is to
+offer pre-packaed architecture conventions, not running software packages.o
 
-This theme for [Zola](https://getzola.org) (static site engine) helps you build and publish your project docs easily and fast. Zola is just one binary that outputs html-pages and additional static assets after building your docs written in Markdown. Thus, you can take the theme, your md-files, Zola and gain flexible and simple website for documentation. 
+In general when a software team wants to use a framework it's usually for one of three reasons:
 
-### Step-by-step
+1. They want pre-packaged conventions. The framework tells them where to put complexity.
+2. They use it because there's wide-spread support, and this allows them to
+   easily get help and move quickly through common pitfalls.
+3. They want pre-built common infrastructure. The framework ships simple APIs
+   to do complicated stuff, and rewards them with a community effort to do it
+   better than they could on their own.
 
-As you may have heard Zola is quite flexible :) So, the scenario below is one of hundreds possible ways to make things done, feel free to find your best. Also, Zola provides their own mechanism to install and use themes, see [the docs](https://www.getzola.org/documentation/themes/installing-and-using-themes/). 
+No-Framewok is not openly opposed to the use of frameworks and not part of any
+"you don't need a framework" mindsets (the author of this document actually
+likes frameworks, a lot). Indeed, you don't need a framework, but often it
+makes sense to have one. No-Framework is a collection of "codeless frameworks"
+(Distros), made up of codeless concepts ("Packages"). 
 
-1. Fork the repo and replace demo-content inside content folder with yours. But take a look to _index.md files. It contains `title` and when you want to have anchor right of your headers add `insert_anchor_links = "right"` to each index. `theme.toml`, screenshot and readme may be deleted too. 
-2. Inside `config.toml` change URL and title on your own. In extra section you can specify path to your GitHub API for version below the logo on nav, favicon and logo itself. Or just remove the lines if you don't need it. Also, you can configure or turn on some additional settings related to Zola. [Specification is here](https://www.getzola.org/documentation/getting-started/configuration/).
-3. In sass/_variables.scss you may change font, color or backgound if you want. 
-4. Almost done. Now, you should decide how you want to build and where will be hosted your website. You can build it locally and upload to somewhere. Or build in GitHub Actions and host on GitHub Pages / Netlify / CloudFlare Pages / AnyS3CloudStorage. [Howto for GitHub Pages](https://www.getzola.org/documentation/deployment/github-pages/). [My example](https://github.com/o365hq/o365hq.com/blob/main/.github/workflows/main.yml) of GitHub workflow with 2-steps build (the first checks for links and spelling errors, the second uploads to Azure). [Dockerfile](https://github.com/codeandmedia/zola_docsascode_theme/blob/master/Dockerfile) to make Docker image.
+## Key concepts
 
-Enjoy your docs!
+- Distros are a currated set of packages that "just make sense together", like
+  you would expect from a framework.
+- Packages are ideas for how to solve common problems. These are either very
+  concrete design patterns, or strict rules on how to approach something
+  (maybe something you would enforce at Code Review or thorugh a linter rule). 
+No framework packages are ideas that stand alone. This means there are no
+supporting scripts or helper functions or third party vendors neede to make the
+idea work. Sometimes a helper function does make the idea better, in this case,
+it is easy to write an actual software package with lines of code, but base it
+on a corresponding no-framework package. Similarly, no-framework packages can
+be based on ideas from real software packages, and paired down to a simpler
+concept, or just rule expected to be enforced 
 
-* _Icons: [Office UI Fabric Icons](https://uifabricicons.azurewebsites.net/)_
-* _Copy-code-button: [Aaron Luna](https://aaronluna.dev/blog/add-copy-button-to-code-blocks-hugo-chroma/)_
+## What is "not a framework" and what is "no framework"?
+
+A framework is often used to enforce rules. "No framework" brings rules but no
+code. "Not a framework" is the reason most people dislike using a framework:
+it's just a mess of any idea without rules. No-framework is code that you write
+without a third party package to enforce concepts. It might be that a framework
+or tool is based on a specific idea from the no-framework catalogue of ideas.
+That's fine, but at that moment the software package is a framework, the
+no-framework concept remains "not a framework", they do not merge, but the
+concrete code can form a dependency on the idea.
+
+
+### Where's the line between no-framework and frameworks?
+In general, things that are well-supported by many languages can belong to
+no-framework. For example: Functions, Classes, variables... but not things like
+the exact functools package in python. The concept of regex is fine, but not
+requiring a specific function in PHP that does string manipulation. If a
+library is available or cloned/ported to many languages, it is not valid in
+No-framework as it heavily depends on real code. This is a fuzzy boundary and
+we will need to improve the explanation as cases come up.
+
+## Why No-framework?
+
+One of the reasons people like frameworks is because they provide rules, but
+the rules are often enforced via lines-of-code that are a hard dependency both
+in API design, software behaviour, dev-dependencies, or some other "code"
+dependency. 
+
+Frameworks are awesome for getting started with a project, but after some years
+there is a non-trivial tax paid for the software dependencies (for your code
+depending on a framework, but also a framework depending on libraries). Interestingly,
+there is a more hidden dependency which is easy to break at any time: the ideas
+behind the framework and libraries. Often, projects have an "invisible"
+conceptual dependency on core ideas that might not be well stated in abstract
+and only discoverable through the specific concretion.
+
+No-framework offers one layer of abstraction between pure idea-space (the space
+of all possible ideas) and code.
+
+There are other reasons consumers of No-Framework might enjoy it, but they are
+secondary benefits and not the primary goal. The biggest of those benefits is usually:
+The team has higher ownership over their code because they wrote it, if they
+need to get out of some situation they can modify their own code. Not all
+software packages make this task very easy, many require hard forking to fix
+and offer complex undocumented software architectures.
